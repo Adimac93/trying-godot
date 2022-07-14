@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/playerRed_walk4.png-2c2d1b8251a9c1e4490053ce937924fd.stex"
+path="res://.import/tilesheet_complete.png-b58edc7169ee7f5458f27ac2c0926641.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player/playerRed_walk4.png"
-dest_files=[ "res://.import/playerRed_walk4.png-2c2d1b8251a9c1e4490053ce937924fd.stex" ]
+source_file="res://assets/main/tilesheet_complete.png"
+dest_files=[ "res://.import/tilesheet_complete.png-b58edc7169ee7f5458f27ac2c0926641.stex" ]
 
 [params]
 

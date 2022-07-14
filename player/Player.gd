@@ -1,40 +1,28 @@
-extends KinematicBody2D
+extends Actor
 
-const WALK_FORCE = 600
-const WALK_MAX_SPEED = 200
-const STOP_FORCE = 1300
-const JUMP_SPEED = 200
+func _physics_process(delta: float) -> void:
+	var is_jump_interrupted: = Input.is_action_just_released("jump") and _velocity.y < 0.0
+	var direction: = get_direction()
+	_velocity = calculate_move_velocity(_velocity,direction,speed,is_jump_interrupted)
+	_velocity = move_and_slide(_velocity,FLOOR_NORMAL)
 
-var velocity = Vector2()
+func get_direction() -> Vector2:
+	return Vector2(
+		Input.get_action_strength("right") - Input.get_action_strength("left"),
+		-1.0 if Input.is_action_just_pressed("jump") and is_on_floor() else 0.0
+	)
 
-onready var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-func _physics_process(delta):
-	var direction = get_direction()
-	# Horizontal movement code. First, get the player's input.
-	var walk = WALK_FORCE * direction
-	# Slow down the player if they're not trying to move.
-	if abs(walk) < WALK_FORCE * 0.2:
-		# The velocity, slowed down a bit, and then reassigned.
-		velocity.x = move_toward(velocity.x, 0, STOP_FORCE * delta)
-	else:
-		velocity.x += walk * delta
-	# Clamp to the maximum horizontal movement speed.
-	velocity.x = clamp(velocity.x, -WALK_MAX_SPEED, WALK_MAX_SPEED)
-
-	# Vertical movement code. Apply gravity.
-	velocity.y += gravity * delta
-
-	# Move based on the velocity and snap to the ground.
-	velocity = move_and_slide_with_snap(velocity, Vector2.DOWN, Vector2.UP)
-
-	# Check for jumping. is_on_floor() must be called after movement code.
-	if is_on_floor() and Input.is_action_just_pressed("jump"):
-		velocity.y = -JUMP_SPEED
-
-func get_direction():
-	if Input.is_action_pressed("right"):
-		return 1
-	if Input.is_action_pressed("left"):
-		return -1
-	return 0
+func calculate_move_velocity(
+		linear__velocity: Vector2,
+		direction: Vector2,
+		speed: Vector2,
+		is_jump_interrupted: bool
+	) -> Vector2:
+	var out: = linear__velocity
+	out.x = speed.x * direction.x
+	out.y += gravity * get_physics_process_delta_time()
+	if direction.y == -1.0:
+		out.y = speed.y * direction.y
+	if is_jump_interrupted:
+		out.y = 0.0
+	return out

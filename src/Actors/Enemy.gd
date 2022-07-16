@@ -5,7 +5,6 @@ func _ready() -> void:
 	_velocity.x = -speed.x
 
 func _on_StompDetector_body_entered(body: PhysicsBody2D) -> void:
-	print(body.global_position.y," ",$StompDetector.global_position.y)
 	if body.global_position.y > $StompDetector.global_position.y:
 		return
 	$CollisionShape2D.disabled = true

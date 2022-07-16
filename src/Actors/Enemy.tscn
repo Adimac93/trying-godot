@@ -25,24 +25,26 @@ collision_mask = 9
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -22 )
 frames = SubResource( 2 )
 animation = "walk"
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 4.5 )
+position = Vector2( 0, -17.5 )
 shape = SubResource( 1 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 0, -22 )
 physics_process_parent = true
 
 [node name="StompDetector" type="Area2D" parent="."]
 modulate = Color( 0.101961, 0.156863, 0.960784, 1 )
-position = Vector2( 0, -13 )
+position = Vector2( 0, -38 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StompDetector"]
-position = Vector2( 0, -8 )
+position = Vector2( 0, -5 )
 shape = SubResource( 3 )
 
 [connection signal="body_entered" from="StompDetector" to="." method="_on_StompDetector_body_entered"]

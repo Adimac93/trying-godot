@@ -24,6 +24,10 @@ config/name="trying-godot"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+shapes/collision/shape_color=Color( 0.7, 0.7, 0.7, 0.419608 )
+
 [input]
 
 jump={
@@ -59,4 +63,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+2d/snapping/use_gpu_pixel_snap=true
 environment/default_environment="res://default_env.tres"
